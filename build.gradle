@@ -1,0 +1,53 @@
+//file:noinspection SpellCheckingInspection
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+version = '2.0'
+
+repositories { mavenCentral() }
+
+dependencies {
+    implementation 'io.github.palexdev:materialfx:11.17.0'
+}
+
+javafx {
+    version = '22.0.2'
+    modules = ['javafx.controls','javafx.fxml','javafx.graphics']
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
+}
+
+application { mainClass = 'app.App' }
+
+tasks.register('packageApp', Exec) {
+    dependsOn installDist
+
+    def inputDir = layout.buildDirectory.dir("install/${project.name}/lib").get().asFile.absolutePath
+    def destDir  = layout.projectDirectory.dir("installer").asFile.absolutePath
+
+    commandLine 'jpackage',
+            '--verbose',
+            '--name', project.name,
+            '--app-version', version,
+            '--vendor', 'TeoPlace',
+            '--input', inputDir,
+            '--main-jar', "${project.name}-${version}.jar",
+            '--main-class', application.mainClass.get(),
+            '--type', 'msi',
+            '--dest', destDir,
+            '--icon', 'icon.ico',
+            '--win-dir-chooser', '--win-menu', '--win-shortcut',
+            //'--win-console',
+            '--win-upgrade-uuid', '12345678-90ab-cdef-1234-567890abcdef',
+            '--java-options','--module-path',
+            '--java-options','$APPDIR;$APPDIR/app;$APPDIR/lib',
+            '--java-options','--add-modules',
+            '--java-options','javafx.controls,javafx.fxml,javafx.graphics'
+}
