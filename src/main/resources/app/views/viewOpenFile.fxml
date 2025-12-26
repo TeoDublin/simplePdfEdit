@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0"
+            styleClass="window-root"
+            stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="app.views.viewOpenFile">
+
+    <BorderPane fx:id="root"
+                prefWidth="800.0"
+                styleClass="window"
+                AnchorPane.bottomAnchor="0.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0"
+                AnchorPane.topAnchor="0.0">
+
+        <top>
+            <Pane prefHeight="58.0" prefWidth="1000.0" styleClass="icon-pane" BorderPane.alignment="CENTER"/>
+        </top>
+
+        <left>
+            <Pane minWidth="70.0" prefHeight="800.0" prefWidth="70.0" styleClass="icon-pane" BorderPane.alignment="CENTER">
+                <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="106.0" prefWidth="306.0" />
+            </Pane>
+        </left>
+
+        <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="pane-light" BorderPane.alignment="CENTER">
+                <Pane fx:id="pdfLoad" prefHeight="769.0" prefWidth="890.0" styleClass="pane">
+                    <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </VBox.margin>
+                </Pane>
+            </VBox>
+        </center>
+
+    </BorderPane>
+</AnchorPane>
